@@ -190,6 +190,7 @@ export const MenuCont = styled.div`
     flex-direction: column;
     ${FlexStyle('flex-start', 'center')}
     .textCont{
+        cursor: pointer;
         z-index: 10;
         position:relative;
         ${FlexStyle('center', 'flex-start')}
@@ -234,6 +235,7 @@ export const HoverBgCont = styled.div`
     }
 `;
 export const PlayBtnCont = styled.div`
+    cursor: pointer;
     position: absolute;
     bottom:150px;
     ${FlexStyle('center', 'center')}
@@ -306,6 +308,7 @@ export const PageNation = styled.div`
     list-style: none;
     ${FlexStyle('center', 'center')}
     li{
+        cursor: pointer;
         margin:5px;
     }
 `;
@@ -317,6 +320,7 @@ export const PageDot = styled.img`
     `}
 `;
 export const ReadMoreCont = styled.div`
+    cursor: pointer;
     position: absolute;
     right:30px;
     ${FlexStyle('center', 'center')}

@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import { StartHeader, MainLogo, StartTitle } from '../styles/styles'
 import TeraLogo from '../resources/images/img_launcher_tera_logo.png';
+import ConnectSnd from '../resources/sounds/UI_Button_Select.wav';
+
+const ConnectSound = () => {
+    return (
+        <audio autoPlay>
+            <source src={ConnectSnd} type="audio/wav" />
+        </audio>
+    )
+}
 
 const Connect = ({ connectShow }) => {
     const [isBtnStart, setIsBtnStart] = useState(false);
@@ -9,6 +18,7 @@ const Connect = ({ connectShow }) => {
         e.preventDefault();
         setIsBtnStart(true);
         setServerText("Connecting to server ...");
+
         setTimeout(() => { setServerText("Connected"); }, 800);
         setTimeout(() => { connectShow(false); }, 1700);
     }
@@ -20,6 +30,9 @@ const Connect = ({ connectShow }) => {
 
     return (
         <StartHeader>
+            {
+                isBtnStart && <ConnectSound />
+            }
             <MainLogo src={TeraLogo} />
             {titleShow(isBtnStart)}
         </StartHeader>

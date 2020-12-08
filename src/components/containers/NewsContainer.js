@@ -5,6 +5,9 @@ import dotImg from '../../resources/images/img_launcher_dot.png';
 import L1BtnImg from '../../resources/images/L1.png';
 import R1BtnImg from '../../resources/images/R1.png';
 import OBtnImg from '../../resources/images/btn_shortcut_o.png';
+import ChgSnd from '../../resources/sounds/UI_Button_Fiqurechange.wav';
+import SelectSnd from '../../resources/sounds/UI_Button_Select.wav';
+
 import {
     NewsCont, NewsBoxTop, NewBoxCont, SliderImgCont,
     SliderHeader, SliderContent, NewsBottomCont, PageNation,
@@ -34,24 +37,54 @@ const newsContentArr = [
     }
 ];
 
+const ChangeSound = () => {
+    return (
+        <audio autoPlay>
+            <source src={ChgSnd} type="audio/wav" />
+        </audio>
+    )
+}
+const SelectSound = () => {
+    return (
+        <audio autoPlay>
+            <source src={SelectSnd} type="audio/wav" />
+        </audio>
+    )
+}
+
 const NewsContainer = () => {
     const [sliderNo, setSliderNo] = useState(0);
-    const handlePrev = () => {
+    const [isReadClick, setIsReadClick] = useState(false);
+    const [isSliderClick, setIsSliderClick] = useState(false);
+    const handlePrev = (e) => {
+        e.preventDefault();
         if (sliderNo > 0) {
             setSliderNo(sliderNo - 1);
+            setIsSliderClick(true);
+            setTimeout(() => { setIsSliderClick(false); }, 500);
         } else {
             setSliderNo(0);
         }
     }
-    const handleNext = () => {
+    const handleNext = (e) => {
+        e.preventDefault();
         if (sliderNo < newsContentArr.length - 1) {
             setSliderNo(sliderNo + 1);
+            setIsSliderClick(true);
+            setTimeout(() => { setIsSliderClick(false); }, 500);
         } else {
             setSliderNo(newsContentArr.length - 1);
         }
     }
+    const handleIsReadClick = (e) => {
+        e.preventDefault();
+        setIsReadClick(true);
+        setTimeout(() => { setIsReadClick(false); }, 500);
+    }
     return (
         <NewsCont>
+            {isSliderClick && <ChangeSound />}
+            {isReadClick && <SelectSound />}
             <NewsBoxTop />
             <NewBoxCont>
                 <SliderImgCont><img className="imgCont" src={newsContentArr[sliderNo].img} alt="" /></SliderImgCont>
@@ -64,7 +97,7 @@ const NewsContainer = () => {
                         <li><PageDot src={dotImg} alt="dot img" selected={sliderNo === 1} /></li>
                         <li onClick={handleNext}><img src={R1BtnImg} alt="" /></li>
                     </PageNation>
-                    <ReadMoreCont><img src={OBtnImg} />Read More</ReadMoreCont>
+                    <ReadMoreCont onClick={handleIsReadClick}><img src={OBtnImg} alt="" />Read More</ReadMoreCont>
                 </NewsBottomCont>
             </NewBoxCont>
         </NewsCont>

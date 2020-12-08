@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { VideoClass } from '../styles/styles';
 import BgMovie from '../resources/videos/BG.webm';
 import BgSound from '../resources/sounds/BGM_Launcher.wav';
@@ -17,20 +17,23 @@ const BgMovieView = () => {
 }
 
 const BgSoundController = () => {
+    const element = useRef(null);
+    if (element.current) element.current.volume = 0.2;
+
     return (
-        <audio autoPlay loop>
+        <audio autoPlay loop ref={element}> 
             <source src={BgSound} type="audio/wav" />
         </audio>
     )
 }
 
-const MainContainer = () => {
+const MainContainer = ({ onClickPlay }) => {
     const [isNavBtn, setIsNavBtn] = useState('nav0');
+
     const onSelectMenu = (boo) => {
         setIsNavBtn(boo)
     }
     const containerSelect = (boo) => {
-        console.log(boo)
         if (boo === 'nav0') {
             return (<NewsContainer />)
         }
@@ -40,7 +43,7 @@ const MainContainer = () => {
     }
     return (
         <LobbyMainStyle>
-            <NavContainer onSelectMenu={onSelectMenu} isNavBtn={isNavBtn} />
+            <NavContainer onSelectMenu={onSelectMenu} isNavBtn={isNavBtn} onClickPlay={onClickPlay} />
             {containerSelect(isNavBtn)}
         </LobbyMainStyle>
     )
@@ -48,14 +51,28 @@ const MainContainer = () => {
 
 const Lobby = () => {
     const [isConnected, setIsConnected] = useState(true);
+    const [isPlay, setIsPlay] = useState(false);
+
+    const onClickPlay = (boo) => {
+        setIsPlay(boo)
+    }
     const connectShow = (boo) => {
         setIsConnected(boo)
     }
+    const playContControl = (boo) => {
+        if (boo) {
+            return ('')
+        } else {
+            return (<>
+                <BgSoundController />
+                <BgMovieView />
+                {isConnected ? <Connect connectShow={connectShow} /> : <MainContainer onClickPlay={onClickPlay} />}
+            </>)
+        }
+    }
     return (
         <>
-            <BgSoundController />
-            <BgMovieView />
-            {isConnected ? <Connect connectShow={connectShow} /> : <MainContainer />}
+            { playContControl(isPlay)}
         </>
     )
 }
