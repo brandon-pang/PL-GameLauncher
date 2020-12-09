@@ -1,6 +1,7 @@
 {
-  "name": "terra-launcher",
-  "version": "0.1.0",
+  "name": "Bera-Game-launcher",
+  "version": "1.0",
+  "author": "Jaehoon Pang <brandon@frontdev.co>",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
