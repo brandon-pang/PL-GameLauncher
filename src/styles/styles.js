@@ -103,6 +103,10 @@ export const LobbyMainStyle = styled.main`
     height: 100vh;
     width:100vw;
     ${FlexStyle('center', 'space-between')}
+    @media (max-width: 875px) {
+        flex-direction: column-reverse;
+        ${FlexStyle('center', 'center')}
+    }
 `;
 /* */
 export const VideoClass = styled.video`
@@ -146,16 +150,20 @@ export const StartTitle = styled.div`
 `;
 // Nav Container
 export const MainNav = styled.nav`
+    padding-left:5%;
     position: relative;
-    padding-left:6%;
-    padding-top:10%;
     width:40%;
     height:100%;
     background-image: url(${MenuBgImg});
     background-size: cover;
     background-repeat: no-repeat;
     flex-direction: column;
-    ${FlexStyle('flex-start', 'flex-start')}
+    ${FlexStyle('flex-start', 'center')}
+    @media (max-width: 875px) {
+        padding-left:0;
+        width:100%;
+        ${FlexStyle('center', 'center')}
+    }
 `;
 export const SmallLogo = styled.img`
     top:10px;
@@ -164,6 +172,10 @@ export const SmallLogo = styled.img`
     width:100%;
     max-width:400px;
     height:auto;
+    @media (max-width: 875px) {
+        top:0;
+        left:0;
+    }
 `;
 export const LoginCont = styled.div`
     margin-bottom: 30px;
@@ -189,6 +201,10 @@ export const MenuCont = styled.div`
     width:100%;
     flex-direction: column;
     ${FlexStyle('flex-start', 'center')}
+    @media (max-width: 875px) {
+        ${FlexStyle('center', 'center')}
+    }
+    
     .textCont{
         cursor: pointer;
         z-index: 10;
@@ -223,11 +239,17 @@ export const HoverBgCont = styled.div`
         height:111px;
         top:-22px;
         left:-450px;
+        @media (max-width: 875px) {
+            left:-100px;
+        }
     ` : `
         width:150%;
         height:140px;
         top:26px;
         left:-540px;
+        @media (max-width: 875px) {
+            left:-200px;
+        }
     `}
     
     .bgLeft{
@@ -237,21 +259,26 @@ export const HoverBgCont = styled.div`
 export const PlayBtnCont = styled.div`
     cursor: pointer;
     position: absolute;
-    bottom:150px;
+    bottom:50px;
+    text-shadow: 2px 2px 5px #000;
     ${FlexStyle('center', 'center')}
-    ${TextStyle('#ccc', 'RobotoRegular', '18px', 'thin')}
+    ${TextStyle('#ccc', 'RobotoRegular', '18px', '')}
 `;
 
 /* News Containers */
 export const NewsCont = styled.section`
     position: relative;
-    padding-right:6%;
-    padding-top:18%;
+    padding-right:5%;
     width:60%;
     max-width: 800px;
     height:100%;
     flex-direction: column;
-    ${FlexStyle('flex-start', 'flex-start')}
+    ${FlexStyle('flex-start', 'center')}
+    @media (max-width: 875px) {
+        margin-top:10px;
+        padding-right:0;
+        width:90%;
+    }
 `;
 export const NewsBoxTop = styled.div`
     position: absolute;
@@ -278,7 +305,7 @@ export const NewBoxCont = styled.div`
 `;
 export const SliderImgCont = styled.div`
     margin:20px;
-    height:381px;
+    height:inherit;
     border:1px solid #999;
     .imgCont{
         width:100%;
@@ -292,11 +319,12 @@ export const SliderHeader = styled.div`
     ${TextStyle('white', 'RobotoMedium', '28px', '400')}
 `;
 export const SliderContent = styled.p`
-    height:90px;
+    
+    min-height:110px;
     margin:20px;
     line-height: 28px;
     text-align: justify;
-    ${TextStyle('#ccc', 'RobotoRegular', '16px', 'thin')}
+    ${TextStyle('#ccc', 'RobotoRegular', '16px', '')}
 `;
 export const NewsBottomCont = styled.div`
     position: relative;
@@ -324,24 +352,27 @@ export const ReadMoreCont = styled.div`
     position: absolute;
     right:30px;
     ${FlexStyle('center', 'center')}
-    ${TextStyle('#ccc', 'RobotoRegular', '18px', 'thin')}
+    ${TextStyle('#ccc', 'RobotoRegular', '18px', '')}
 `;
 
 /* TOS */
 export const TosCont = styled.section`
     position: relative;
-    padding-right:6%;
-    padding-top:18%;
+    padding-right:5%;
     width:60%;
     max-width: 800px;
     height:100%;
     flex-direction: column;
-    ${FlexStyle('flex-start', 'flex-start')}
+    ${FlexStyle('flex-start', 'center')}
+    @media (max-width: 875px) {
+        margin-top:10px;
+        padding-right:0;
+        width:90%;
+    }
 `;
 
 export const TosBoxTop = styled.div`
     position: absolute;
-    width:100%;
     height:20px;
     background-image: url(${contLightImg});
     background-size: 100%;
@@ -351,8 +382,7 @@ export const TosBoxTop = styled.div`
 
 export const TosBoxCont = styled.div`
     position: relative;
-    top:16px;
-    width:100%;
+    padding:20px;
     box-shadow: 1px 1px 10px #111;
     border-right:1px solid #343b3f;
     border-bottom:1px solid #343b3f;
@@ -364,11 +394,12 @@ export const TosBoxCont = styled.div`
 `;
 
 export const TosContentCont = styled.div`
-    margin:20px;
-    height:620px;
+    height:100%;
+    max-height:600px;
     border:1px solid #999;
     .tosTxt{
         top:10px;
+        margin-bottom: 20px;
         z-index:10;
         position: relative;
         overflow-y: scroll;
@@ -381,8 +412,11 @@ export const TosContentCont = styled.div`
             background-image: url(${btnRtbImg});
             background-size: 58px 58px;
             background-repeat: no-repeat;
+            width:58px;
+            height:58px;
         }
-        height: 600px;
+        height:100%;
+        max-height:570px;
         padding-left:14px;
         h1{
             ${TextStyle('white', 'RobotoMedium', '32px', '400')}
